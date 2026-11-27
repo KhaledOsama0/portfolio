@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Portfolio of Khaled Osama, a Flutter developer.">
+<meta property="og:title" content="Khaled Osama">
+<meta property="og:description" content="Portfolio of Khaled Osama, a Flutter developer.">
+<style>:root{color-scheme:light dark}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Khaled Osama</title>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap">
+<style>
+/* Layout: sticky slim header, split hero (intro + portrait), project index as ruled rows, skills grid, contact. */
+:root {
+  --bg: #f2f5f9;
+  --surface: #ffffff;
+  --fg: #0f1c2e;
+  --muted: #55657a;
+  --line: #d9e0ea;
+  --accent: #0b6bd6;
+  --accent-ink: #ffffff;
+  --code-bg: #0f1c2e;
+  --code-fg: #d6e2f2;
+  --code-key: #6fb3ff;
+  --code-str: #8fe0b5;
+  --code-dim: #7d8da3;
+  --aura-a: #2b2417; --aura-b: #0b0c11; --aura-glow: rgba(201, 163, 92, 0.30);
+  --mammo-a: #12384a; --mammo-b: #0a1820; --mammo-glow: rgba(80, 168, 200, 0.32);
+  --bmi-a: #33124f; --bmi-b: #080212; --bmi-glow: rgba(120, 90, 255, 0.30);
+  --display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+  --body: "Inter", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0c1522; --surface: #132033; --fg: #e8eef7; --muted: #94a5ba; --line: #24364d;
+    --accent: #5aa8ff; --accent-ink: #08121f;
+    --code-bg: #08111d; --code-fg: #d6e2f2; --code-key: #6fb3ff; --code-str: #8fe0b5; --code-dim: #6f8099;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0c1522; --surface: #132033; --fg: #e8eef7; --muted: #94a5ba; --line: #24364d;
+  --accent: #5aa8ff; --accent-ink: #08121f;
+  --code-bg: #08111d; --code-fg: #d6e2f2; --code-key: #6fb3ff; --code-str: #8fe0b5; --code-dim: #6f8099;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--body); font-size: 16px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+.wrap { max-width: 1040px; margin: 0 auto; }
+
+header.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 9;
+  background: var(--bg); border-bottom: 1px solid var(--line);
+  margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px)));
+  padding-inline: max(16px, env(safe-area-inset-left, 0px));
+}
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 12px; }
+.brand { white-space: nowrap; font-family: var(--display); font-weight: 700; text-decoration: none; letter-spacing: -0.01em; }
+nav { display: flex; gap: 6px 18px; justify-content: flex-end; font-size: 14px; flex-wrap: wrap; }
+nav a { text-decoration: none; color: var(--muted); }
+nav a:hover { color: var(--fg); }
+
+.hero { padding-block: 56px 56px; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr); gap: 56px; align-items: center; }
+.photo { margin: 0; position: relative; max-width: 380px; width: 100%; justify-self: end; }
+.photo::after { content: ""; position: absolute; inset: 0; border-radius: 14px; background: linear-gradient(180deg, transparent 60%, color-mix(in srgb, var(--accent) 28%, transparent)); mix-blend-mode: soft-light; pointer-events: none; }
+.photo img { position: relative; display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 14px; border: 1px solid var(--line); background: var(--surface); }
+.stats { display: flex; flex-wrap: wrap; gap: 12px 32px; margin-top: 36px; padding-top: 20px; border-top: 1px solid var(--line); font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+.stats b { display: block; font-family: var(--display); font-size: 1.5rem; color: var(--fg); letter-spacing: -0.02em; }
+.hero > * { min-width: 0; }
+.eyebrow { font-family: var(--mono); font-size: 13px; color: var(--accent); letter-spacing: 0.04em; text-transform: uppercase; margin: 0 0 16px; }
+h1 { font-family: var(--display); font-weight: 700; font-size: clamp(2.4rem, 6vw, 4rem); line-height: 1.04; letter-spacing: -0.03em; margin: 0 0 20px; text-wrap: balance; }
+.lede { color: var(--muted); font-size: 1.1rem; max-width: 52ch; margin: 0 0 28px; }
+.cta { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn { display: inline-block; padding: 11px 20px; border-radius: 8px; font-weight: 600; font-size: 15px; text-decoration: none; border: 1px solid var(--fg); }
+.btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.btn.ghost { background: transparent; color: var(--fg); }
+.btn:hover { filter: brightness(1.08); }
+
+
+section { padding-block: 56px; border-top: 1px solid var(--line); }
+h2 { font-family: var(--display); font-size: clamp(1.5rem, 3.4vw, 2rem); letter-spacing: -0.02em; margin: 0 0 8px; text-wrap: balance; }
+.sub { color: var(--muted); margin: 0 0 32px; max-width: 60ch; }
+
+.about { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.about > * { min-width: 0; }
+.about p { margin: 0 0 14px; max-width: 62ch; }
+.facts { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.facts li { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+.facts span:first-child { color: var(--muted); }
+.facts span:last-child { text-align: right; font-weight: 500; }
+
+.proj { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: 56px; align-items: center; padding-block: 48px; border-top: 1px solid var(--line); }
+.proj:nth-of-type(even) { grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); }
+.proj:nth-of-type(even) .info { order: 2; }
+.proj > * { min-width: 0; }
+.kicker { font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--accent); margin: 0 0 10px; }
+.proj h3 { font-family: var(--display); font-size: clamp(1.7rem, 3.6vw, 2.3rem); margin: 0 0 14px; letter-spacing: -0.02em; line-height: 1.1; }
+.proj p { margin: 0 0 16px; color: var(--muted); max-width: 52ch; }
+.proj ul { margin: 0 0 20px; padding-left: 18px; max-width: 52ch; }
+.proj li { margin-bottom: 6px; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.tags span { font-family: var(--mono); font-size: 12px; padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); }
+.link { display: inline-block; padding: 10px 18px; border: 1px solid var(--fg); border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; }
+.link:hover { background: var(--fg); color: var(--bg); }
+
+.stage { --ar: 540 / 1118; display: flex; align-items: center; justify-content: center; gap: 2.5%; padding: 44px 18px; border-radius: 22px; overflow: hidden; background: radial-gradient(70% 60% at 50% 35%, var(--glow), transparent 72%), linear-gradient(160deg, var(--a), var(--b)); }
+.stage.aura { --a: var(--aura-a); --b: var(--aura-b); --glow: var(--aura-glow); }
+.stage.mammo { --a: var(--mammo-a); --b: var(--mammo-b); --glow: var(--mammo-glow); }
+.stage.bmi { --a: var(--bmi-a); --b: var(--bmi-b); --glow: var(--bmi-glow); --ar: 540 / 1028; }
+.phone { flex: 0 1 29%; min-width: 0; margin: 0; padding: 4px; border-radius: 24px; background: #07090d; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.14), 0 26px 40px -14px rgba(0, 0, 0, 0.65); transform: translateY(18px); }
+.phone.main { flex-basis: 36%; transform: translateY(-6px); z-index: 1; }
+.phone img { display: block; width: 100%; height: auto; aspect-ratio: var(--ar); object-fit: cover; object-position: top; border-radius: 20px; }
+
+.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; }
+.skills > div { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; min-width: 0; }
+.skills h3 { font-family: var(--mono); font-size: 12.5px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--accent); margin: 0 0 12px; }
+.skills ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-size: 15px; }
+
+.contact { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+.contact h2 { font-size: clamp(1.8rem, 4.5vw, 2.8rem); max-width: 18ch; }
+
+.contact-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; align-items: start; }
+.contact-grid > * { min-width: 0; }
+.contact-info h2 { font-size: clamp(1.8rem, 4.5vw, 2.8rem); line-height: 1.1; max-width: 14ch; margin-bottom: 14px; }
+.contact-info .sub { margin-bottom: 8px; }
+.channels { list-style: none; margin: 24px 0 0; padding: 0; border-top: 1px solid var(--line); }
+.channels li { display: grid; grid-template-columns: 76px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+.channels .label { font-family: var(--mono); font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.channels .val { overflow-wrap: anywhere; font-weight: 500; }
+.channels a.val { text-decoration: none; }
+.channels a.val:hover { text-decoration: underline; }
+.copy { font: inherit; font-size: 13px; font-weight: 600; padding: 6px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--fg); cursor: pointer; }
+.copy:hover { border-color: var(--fg); }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 24px; display: grid; gap: 16px; }
+.field { display: grid; gap: 6px; }
+.field label { font-size: 13px; font-weight: 600; }
+.field input, .field textarea { font: inherit; width: 100%; padding: 11px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--fg); }
+.field textarea { min-height: 130px; resize: vertical; }
+.field input:focus-visible, .field textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.actions { display: flex; gap: 12px; flex-wrap: wrap; }
+button.btn { font-family: inherit; cursor: pointer; }
+.status { min-height: 1.4em; margin: 0; font-size: 13px; color: var(--muted); }
+.note { margin: 0; font-size: 12.5px; color: var(--muted); }
+
+.edu { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 24px; }
+.edu h3 { font-family: var(--display); font-size: 1.3rem; line-height: 1.25; letter-spacing: -0.01em; margin: 0 0 6px; }
+.edu .deg { color: var(--muted); margin: 0 0 22px; }
+.edu .label { font-family: var(--mono); font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+.edu .tags { margin-bottom: 0; }
+.xp { display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 12px 40px; padding-block: 28px; border-top: 1px solid var(--line); }
+.xp:last-of-type { border-bottom: 1px solid var(--line); }
+.xp .when { font-family: var(--mono); font-size: 13px; color: var(--accent); }
+.xp h3 { font-family: var(--display); font-size: 1.3rem; letter-spacing: -0.01em; margin: 0 0 4px; }
+.xp .org { color: var(--muted); margin: 0 0 14px; }
+.xp ul { margin: 0; padding-left: 18px; max-width: 66ch; }
+.xp li { margin-bottom: 6px; }
+.services { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 28px 24px; }
+.svc { border-top: 2px solid var(--fg); padding-top: 18px; min-width: 0; }
+.svc h3 { font-family: var(--display); font-size: 1.15rem; letter-spacing: -0.01em; margin: 0 0 8px; }
+.svc p { margin: 0; color: var(--muted); font-size: 15px; }
+footer { padding-block: 28px 40px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; font-family: var(--mono); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+@media (max-width: 820px) {
+  .hero, .about { grid-template-columns: 1fr; gap: 32px; }
+  .hero { padding-block: 32px 32px; }
+  .photo { order: -1; justify-self: start; max-width: 200px; }
+  .proj { grid-template-columns: 1fr; gap: 28px; padding-block: 36px; }
+  .proj:nth-of-type(even) { grid-template-columns: 1fr; }
+  .proj:nth-of-type(even) .info { order: 0; }
+  .phone.main { flex-basis: 38%; }
+  .stage { padding: 28px 10px; border-radius: 16px; }
+  .phone { border-radius: 16px; padding: 3px; }
+  .phone img { border-radius: 13px; }
+  section { padding-block: 40px; }
+  .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+  .xp { grid-template-columns: 1fr; gap: 6px; }
+  .edu { padding: 18px; }
+  .card { padding: 18px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top">Khaled Osama</a>
+    <nav aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#work">Work</a>
+      <a href="#services">Services</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" id="top">
+  <div class="hero">
+    <div>
+      <p class="eyebrow">Hi, I'm Khaled · Flutter developer</p>
+      <h1>I turn ideas into Flutter apps that feel fast and stay clean.</h1>
+      <p class="lede">I ship Flutter apps with BLoC/Cubit, structured data layers and reusable component libraries.</p>
+      <div class="cta">
+        <a class="btn primary" href="#work">See my work</a>
+        <a class="btn ghost" href="https://github.com/KhaledOsama0" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn ghost" href="https://www.linkedin.com/in/khaled-osama0" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+    <figure class="photo">
+      <img src="photo.jpg" width="800" height="1000" alt="Portrait of Khaled Osama standing by a stone railing at night" fetchpriority="high">
+    </figure>
+  </div>
+
+  <section id="about">
+    <div class="about">
+      <div>
+        <h2>About</h2>
+        <p>I'm Khaled Osama, a professional Flutter Developer dedicated to turning creative ideas into practical mobile solutions. I specialize in building cross-platform applications using Flutter and Dart, focusing on performance, usability, and clean code. I help startups, businesses, and individuals transform their ideas into functional, user-friendly mobile applications. My technical skills include Firebase, REST APIs, State Management, Authentication, and Responsive UI Development.</p>
+        <p>Through hands-on projects, I've gained practical experience developing e-commerce applications and API-integrated solutions. What makes me different is my problem-solving mindset, attention to detail, and commitment to understanding each client's needs. I believe every successful application should combine great design, reliable functionality, and a seamless user experience. Looking to bring your next mobile app idea to life? Let's connect and build something meaningful together.</p>
+      </div>
+      <div class="edu">
+        <p class="kicker">Education</p>
+        <h3>Misr Higher Institute for Commerce and Computers</h3>
+        <p class="deg">Bachelor's student, Computer Science</p>
+        <p class="label">Relevant coursework</p>
+        <div class="tags">
+          <span>Object-Oriented Programming</span><span>Data Structures &amp; Algorithms</span><span>Database Management Systems</span><span>Software Engineering</span><span>Operating Systems</span><span>Computer Networks</span><span>Web Development</span><span>Mobile Development</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <h2>Experience</h2>
+    <p class="sub">Hands-on Flutter work and a mobile development internship.</p>
+    <div class="xp">
+      <div class="when">2025 – Present</div>
+      <div>
+        <h3>Flutter Developer</h3>
+        <p class="org">Practical projects</p>
+        <ul>
+          <li>Developed cross-platform mobile applications using Flutter and Dart.</li>
+          <li>Integrated REST APIs and Firebase services for authentication and data management.</li>
+          <li>Implemented state management using BLoC and Cubit.</li>
+          <li>Built responsive interfaces with a focus on usability and clean code.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="xp">
+      <div class="when">October – Present</div>
+      <div>
+        <h3>Mobile Application Development Internship</h3>
+        <p class="org">NTI</p>
+        <ul>
+          <li>Practical internship work in Flutter and Dart.</li>
+          <li>Applied OOP concepts and modern Flutter development practices.</li>
+          <li>Collaborated on a team-based e-commerce project.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <h2>Selected work</h2>
+    <p class="sub">Three Flutter apps, each with its own audience and visual identity.</p>
+
+    <article class="proj">
+      <div class="info">
+        <p class="kicker">Health · AI</p>
+        <h3>Mammo Care</h3>
+        <p>An AI-powered app for breast cancer screening and follow-up care. Patients securely upload imaging scans, an AI model analyzes them, and the assessment comes back as a clear, structured report they can revisit at any time.</p>
+        <ul>
+          <li>Sign up, sign in and password reset.</li>
+          <li>New AI scan, analysis results and report history.</li>
+          <li>English and Arabic, with light and dark themes.</li>
+        </ul>
+        <div class="tags"><span>Flutter</span><span>Supabase</span><span>AI integration</span><span>Bilingual UI</span></div>
+        <a class="link" href="https://github.com/KhaledOsama0/Mammo-Care" target="_blank" rel="noopener">View repository →</a>
+      </div>
+      <div class="stage mammo">
+        <figure class="phone"><img src="img/mammo-1.webp" width="540" height="1115" alt="Mammo Care splash screen with a pink ribbon and the tagline Your health, understood" loading="lazy"></figure>
+        <figure class="phone main"><img src="img/mammo-2.webp" width="540" height="1115" alt="Mammo Care home screen with quick actions for a new AI scan and viewing reports" loading="lazy"></figure>
+        <figure class="phone"><img src="img/mammo-3.webp" width="540" height="1118" alt="Mammo Care onboarding screen about safe and secure health data" loading="lazy"></figure>
+      </div>
+    </article>
+
+    <article class="proj">
+      <div class="info">
+        <p class="kicker">E-commerce</p>
+        <h3>Aura Maison</h3>
+        <p>A luxury accessories shopping app with a dark, gold-accented design. Browse limited-time offers, curated categories and featured pieces, then open a product to explore its gallery, choose a finish and add it to the bag.</p>
+        <ul>
+          <li>Home with offers carousel, curated disciplines and featured products.</li>
+          <li>Product details with gallery, finish selector and price block.</li>
+          <li>Reviews and notifications connected to a REST API.</li>
+        </ul>
+        <div class="tags"><span>Flutter</span><span>MVVM</span><span>Cubit</span><span>REST API</span><span>SharedPreferences</span></div>
+        <a class="link" href="https://github.com/iamahmedzz8/AURA-E-Commerce-App" target="_blank" rel="noopener">View repository →</a>
+      </div>
+      <div class="stage aura">
+        <figure class="phone"><img src="img/aura-1.webp" width="540" height="1118" alt="Aura Maison splash screen with a gold shopping bag logo" loading="lazy"></figure>
+        <figure class="phone main"><img src="img/aura-2.webp" width="540" height="1105" alt="Aura Maison home screen with offers, curated disciplines and featured watches" loading="lazy"></figure>
+        <figure class="phone"><img src="img/aura-3.webp" width="540" height="1118" alt="Aura Maison product details screen for a silver watch with finish options" loading="lazy"></figure>
+      </div>
+    </article>
+
+    <article class="proj">
+      <div class="info">
+        <p class="kicker">Utility · Arabic-first</p>
+        <h3>BMI Calculator</h3>
+        <p>An Arabic-first BMI calculator. Enter height, weight and age, then read the result on a color-coded gauge with a friendly verdict. Every reading is saved on the device in a history of family and friends, with a daily challenge, a water counter and points to keep it fun.</p>
+        <ul>
+          <li>Live inputs for gender, height, weight and age.</li>
+          <li>Animated gauge from underweight to obese.</li>
+          <li>Local history with delete, built on BLoC / Cubit.</li>
+        </ul>
+        <div class="tags"><span>Flutter</span><span>BLoC / Cubit</span><span>Local database</span><span>RTL layout</span></div>
+        <a class="link" href="https://github.com/KhaledOsama0/flutter_nti/tree/main/bmi_calculater" target="_blank" rel="noopener">View repository →</a>
+      </div>
+      <div class="stage bmi">
+        <figure class="phone"><img src="img/bmi-1.webp" width="540" height="1028" alt="BMI Calculator input screen with gender, height, weight and age" loading="lazy"></figure>
+        <figure class="phone main"><img src="img/bmi-2.webp" width="540" height="1028" alt="BMI Calculator result screen with a color-coded gauge reading 22.2" loading="lazy"></figure>
+        <figure class="phone"><img src="img/bmi-3.webp" width="540" height="1028" alt="BMI Calculator history list of saved results" loading="lazy"></figure>
+      </div>
+    </article>
+  </section>
+
+  <section id="services">
+    <h2>Services</h2>
+    <p class="sub">What I can build or improve for you.</p>
+    <div class="services">
+      <div class="svc">
+        <h3>Mobile app development</h3>
+        <p>Cross-platform apps built with Flutter and Dart, shipped for both Android and iOS from one codebase.</p>
+      </div>
+      <div class="svc">
+        <h3>UI implementation</h3>
+        <p>UI/UX designs turned into responsive, modern and user-friendly Flutter interfaces.</p>
+      </div>
+      <div class="svc">
+        <h3>API and Firebase integration</h3>
+        <p>Mobile apps connected to REST APIs and Firebase for authentication and data management.</p>
+      </div>
+      <div class="svc">
+        <h3>Maintenance and improvement</h3>
+        <p>Improving existing Flutter apps: fixing bugs and enhancing functionality and user experience.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <p class="sub">What I use most, grouped by the part of the app it supports.</p>
+    <div class="skills">
+      <div>
+        <h3>Mobile</h3>
+        <ul><li>Flutter</li><li>Dart</li><li>Custom widgets and theming</li><li>Dark mode</li><li>Arabic / RTL layouts</li></ul>
+      </div>
+      <div>
+        <h3>Architecture</h3>
+        <ul><li>BLoC / Cubit</li><li>MVVM</li><li>Layered data and UI code</li><li>Reusable component libraries</li></ul>
+      </div>
+      <div>
+        <h3>Backend and data</h3>
+        <ul><li>REST API integration</li><li>Supabase</li><li>Firebase</li><li>Strapi</li><li>Local storage and SharedPreferences</li><li>Google and Facebook sign-in</li></ul>
+      </div>
+      <div>
+        <h3>Workflow</h3>
+        <ul><li>Git and GitHub</li><li>Feature branches and pull requests</li><li>Clean, reusable code</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h2>Let's build something together.</h2>
+        <p class="sub">I'm open to Flutter internships and junior roles. Write to me directly or use the form.</p>
+        <ul class="channels">
+          <li><span class="label">Email</span><a class="val" href="mailto:khaledosama7980@gmail.com">khaledosama7980@gmail.com</a><button class="copy" type="button" data-copy="khaledosama7980@gmail.com">Copy</button></li>
+          <li><span class="label">Phone</span><span class="val">+201066285190</span><button class="copy" type="button" data-copy="+201066285190">Copy</button></li>
+          <li><span class="label">LinkedIn</span><a class="val" href="https://www.linkedin.com/in/khaled-osama0" target="_blank" rel="noopener">khaled-osama0</a><span></span></li>
+          <li><span class="label">GitHub</span><a class="val" href="https://github.com/KhaledOsama0" target="_blank" rel="noopener">KhaledOsama0</a><span></span></li>
+        </ul>
+      </div>
+      <form class="card" id="contact-form" novalidate>
+        <div class="field"><label for="f-name">Your name</label><input id="f-name" type="text" autocomplete="name" placeholder="Jane Doe"></div>
+        <div class="field"><label for="f-email">Your email</label><input id="f-email" type="email" autocomplete="email" placeholder="jane@company.com"></div>
+        <div class="field"><label for="f-msg">Message</label><textarea id="f-msg" placeholder="Tell me about the role or project."></textarea></div>
+        <div class="actions">
+          <a class="btn primary" id="send-mail" href="mailto:khaledosama7980@gmail.com">Send by email</a>
+          <a class="btn ghost" id="send-wa" href="https://wa.me/201066285190" target="_blank" rel="noopener">Send on WhatsApp</a>
+          <button class="btn ghost" id="copy-msg" type="button">Copy message</button>
+        </div>
+        <p class="status" id="f-status" role="status" aria-live="polite"></p>
+        <p class="note">This form opens your email app or WhatsApp with the message filled in. Nothing is sent until you press send there.</p>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Khaled Osama</span>
+    <span>Flutter · Dart · Cubit</span>
+  </footer>
+</main>
+
+<script>
+(function () {
+  var MAIL = "khaledosama7980@gmail.com", WA = "201066285190";
+  var form = document.getElementById("contact-form");
+  var nameEl = document.getElementById("f-name"), emailEl = document.getElementById("f-email"), msgEl = document.getElementById("f-msg");
+  var mail = document.getElementById("send-mail"), wa = document.getElementById("send-wa"), copyMsg = document.getElementById("copy-msg");
+  var status = document.getElementById("f-status");
+  function body() {
+    var n = nameEl.value.trim(), e = emailEl.value.trim();
+    return "Hi Khaled,\n\n" + msgEl.value.trim() + "\n\n" + (n || "") + (e ? " (" + e + ")" : "");
+  }
+  function sync() {
+    var n = nameEl.value.trim(), b = encodeURIComponent(body());
+    mail.href = "mailto:" + MAIL + "?subject=" + encodeURIComponent("Portfolio message" + (n ? " from " + n : "")) + "&body=" + b;
+    wa.href = "https://wa.me/" + WA + "?text=" + b;
+  }
+  function needMessage(ev) {
+    if (msgEl.value.trim()) return false;
+    ev.preventDefault();
+    status.textContent = "Write a message first.";
+    msgEl.focus();
+    return true;
+  }
+  function copy(text, done) {
+    function fallback() {
+      var t = document.createElement("textarea");
+      t.value = text; t.style.position = "fixed"; t.style.opacity = "0";
+      document.body.appendChild(t); t.select();
+      var ok = false;
+      try { ok = document.execCommand("copy"); } catch (e) {}
+      document.body.removeChild(t);
+      done(ok);
+    }
+    try {
+      navigator.clipboard.writeText(text).then(function () { done(true); }, fallback);
+    } catch (e) { fallback(); }
+  }
+  form.addEventListener("input", sync);
+  form.addEventListener("submit", function (ev) { ev.preventDefault(); });
+  mail.addEventListener("click", function (ev) {
+    if (needMessage(ev)) return;
+    status.textContent = "Opening your email app. If nothing happens, copy the message or write to " + MAIL + ".";
+  });
+  wa.addEventListener("click", function (ev) {
+    if (needMessage(ev)) return;
+    status.textContent = "Opening WhatsApp in a new tab.";
+  });
+  copyMsg.addEventListener("click", function (ev) {
+    if (needMessage(ev)) return;
+    copy(body(), function (ok) { status.textContent = ok ? "Message copied." : "Copy was blocked. Select the text in the box and copy it manually."; });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-copy]"), function (btn) {
+    btn.addEventListener("click", function () {
+      copy(btn.getAttribute("data-copy"), function (ok) {
+        var old = btn.textContent;
+        btn.textContent = ok ? "Copied" : "Select text";
+        setTimeout(function () { btn.textContent = old; }, 1500);
+      });
+    });
+  });
+  sync();
+})();
+</script>
+
+</body>
+</html>
